@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>onelink</title>
+</head>
+
+<body>
+</body>
+<script>
+(function() {
+    function getQueryString(name) {
+        var name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+    setTimeout(function() {
+        if (document.visibilityState !== 'hidden') {
+            if (getQueryString('urlweb')) {
+                window.location = getQueryString('urlweb');
+            } else {
+                console.warn('urlweb is empty');
+            }
+        }
+    }, 900);
+
+    if (getQueryString('urlapp')) {
+        window.location = getQueryString('urlapp');
+    } else {
+        console.warn('urlapp is empty');
+    }
+})();
+</script>
+
+</html>
